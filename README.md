@@ -31,3 +31,7 @@ The node code then simply parses the JSON, loads the data and executes the code 
 	     console.log(eval(parsedPayload.code));
 	}
 `````
+
+##nodes##
+
+Nodes can provide a wide range of capabilities.  Node capabilities are defined by the "libraries" included in their host.js code.  If a node receives a job that it can't process due to lack of capability this triggers an exception and the job is returned to the queue to be picked up by another node.
