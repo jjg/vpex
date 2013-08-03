@@ -5,7 +5,7 @@ Virus-inspired distributed computing
 
 A processing node that gets both its data and instructions via external service call.  Since the program is "inserted" into the node from an external source it is "virus-like", hosting the instructions of another.
 
-[!overview](https://raw.github.com/jjg/vpex/master/vpex.png)
+![overview](https://raw.github.com/jjg/vpex/master/vpex.png)
 
 The simplest implementation I can imagine for this is a Raspberry Pi running Node.js.  A short node program is written that polls an external service at a regular interval requesting the next job.  A job consists of a block of JSON containing a node which in turn contains the code to be executed, and any data the code needs to do its work is stored in (or referenced in) other structures within the same javascript block.
 
