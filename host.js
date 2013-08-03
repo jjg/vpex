@@ -34,8 +34,6 @@ var req = http.request(options, function(res) {
   				console.log("error making callback: " + e.message);
 
 			});
-
-			res.end();
 	  });
 });
 

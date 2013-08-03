@@ -6,7 +6,7 @@ http.createServer(function (req, res) {
 	console.log('request:');
 	console.log(req.url);
 
-	var payload = null;
+	var payload = 'ok';
 
 	var route = req.url.split('/');
 	route = route[1].split('?');
@@ -18,7 +18,8 @@ http.createServer(function (req, res) {
 			payload = getJob();
 			break;
 		case 'updatejob':
-			payload = updateJob(req.url);
+			var jobResult = req.url.split('?')[1]
+			payload = updateJob(jobResult);
 			break;
 	}
 
@@ -38,8 +39,11 @@ function getJob(){
 }
 
 function updateJob(result){
+
+
 	console.log(result)
 	console.log('job output: ' + result);
 
-	
+	return result
+
 }
