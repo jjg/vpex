@@ -3,18 +3,15 @@ var http = require('http');
 var options = {
 	hostname: 'localhost',
 	port: 1337,
-	path: '/',
+	path: '/getjob',
 	method: 'GET'
 };
 
 var req = http.request(options, function(res) {
-	  //console.log('STATUS: ' + res.statusCode);
-	  //console.log('HEADERS: ' + JSON.stringify(res.headers));
+
 	  res.setEncoding('utf8');
 
 	  res.on('data', function (chunk) {
-
-	    	//console.log('BODY: ' + chunk);
 
 	    	var payload = chunk;
 
@@ -22,7 +19,23 @@ var req = http.request(options, function(res) {
 
 			data = eval(parsedPayload.data);
 
-			console.log(eval(parsedPayload.code));
+			var result = eval(parsedPayload.code);
+
+			console.log('job output:');
+			console.log(result);
+
+			// callback
+			http.get("http://localhost:1337/updatejob?result=" + result, function(res) {
+
+  				//console.log("Got response: " + res.statusCode);
+
+			}).on('error', function(e) {
+
+  				console.log("error making callback: " + e.message);
+
+			});
+
+			res.end();
 	  });
 });
 
