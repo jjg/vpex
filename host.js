@@ -19,7 +19,13 @@ var req = http.request(options, function(res) {
 
 			data = eval(parsedPayload.data);
 
-			var result = eval(parsedPayload.code);
+			var result = null;
+
+			try{
+				result = eval(parsedPayload.code);
+			}catch(err){
+				result = 'fail';
+			}
 
 			console.log('job output:');
 			console.log(result);
