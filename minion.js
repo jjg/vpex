@@ -4,7 +4,7 @@ function doBidding(){
 		{
 	  		if (xmlhttp.readyState==4 && xmlhttp.status==200)
 	    	{
-				console.log(xmlhttp.responseText);
+				//console.log(xmlhttp.responseText);
 
 				var payload = xmlhttp.responseText;
 
@@ -33,4 +33,6 @@ function doBidding(){
 	xmlhttp.send();
 }
 
-doBidding();
+setInterval(function(){
+	doBidding();
+},5000);
