@@ -1,4 +1,5 @@
 nodeId = null;
+strawboss = '10.0.1.15';
 
 function doBidding(){
 	var xmlhttp = new XMLHttpRequest();
@@ -6,14 +7,10 @@ function doBidding(){
 		{
 	  		if (xmlhttp.readyState==4 && xmlhttp.status==200)
 	    	{
-				//console.log(xmlhttp.responseText);
-
 				var payload = xmlhttp.responseText;
 
 		    	parsedPayload = JSON.parse(payload);
 
-		    	console.log(parsedPayload);
-		    	
 		    	nodeId = parsedPayload.nodeId;
 
 				data = eval(parsedPayload.data);
@@ -26,22 +23,21 @@ function doBidding(){
 					result = 'fail';
 				}
 
+				callback = eval(parsedPayload.callback);
+		    	console.log(callback);
+
 				console.log('job output:');
 				console.log(result);
 
 				// callback
 				var cbxmlhttp = new XMLHttpRequest();
-				cbxmlhttp.open("GET",'http://10.0.1.15:1337/status?nodeid=' + nodeId + '&capacity=' + result, true);
-				//cbxmlhttp.open("GET",'http://localhost:1337/updatejob?result=' + result,true);
+				cbxmlhttp.open('GET',callback,true);
 				cbxmlhttp.send();
 	    	}
 	  	}
-	xmlhttp.open('GET','http://10.0.1.15:1337/getjob?nodeid=' + nodeId, true);
+	xmlhttp.open('GET','http://' + strawboss + ':1337/getjob?nodeid=' + nodeId, true);
 	xmlhttp.send();
 }
-
-//doBidding();
-
 
 setInterval(function(){
 	doBidding();

@@ -6,15 +6,10 @@ var lastNode = 0;
 
 http.createServer(function (req, res) {
 
-	//console.log('request:');
-	//console.log(req.url);
-
 	var payload = 'ok';
 
 	var route = req.url.split('/');
 	route = route[1].split('?');
-
-	//console.log('selected route: ' + route[0]);
 
 	switch(route[0]){
 		case 'getjob':
@@ -63,7 +58,6 @@ http.createServer(function (req, res) {
 
 	}
 
-	//console.log(payload);
  	res.writeHead(200, {'Content-Type': 'text/plain','Access-Control-Allow-Origin': '*'});
  	res.end(payload);
 
@@ -73,7 +67,7 @@ console.log('Server running at http://10.0.1.15:1337/');
 
 function getJob(nodeId){
 
-	var payload = "{\"nodeId\":\"" + nodeId + "\",\"code\":\"function getFlops(){var s = new Date().getTime(); for(i=0;i<10000;i++){m = 10 / 3.3;} var e = new Date().getTime(); d = e - s;  return d;} getFlops();\", \"data\":{}}"
+	var payload = "{\"nodeId\":\"" + nodeId + "\",\"callback\":\"\'http://\'+ strawboss + \':1337/status?nodeid=\' + nodeId + \'&capacity=\' + result\",\"code\":\"function getFlops(){var s = new Date().getTime(); for(i=0;i<10000;i++){m = 10 / 3.3;} var e = new Date().getTime(); d = e - s;  return d;} getFlops();\", \"data\":{}}"
 	//var payload = "{\"code\": \"function sayHello(who){var helloPhrase = \'hello \' + who;return helloPhrase} sayHello(data.username);\",\"data\":{\"username\": \"jason\"}}";
 	//var payload = "{\"code\": \"function stealPasswd(){fs.readFile(\'/etc/passwd\',function(e,t){return t})} stealPasswd();\",\"data\":{}}";
 
