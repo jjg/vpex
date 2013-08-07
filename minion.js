@@ -1,3 +1,5 @@
+nodeId = null;
+
 function doBidding(){
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange=function()
@@ -9,6 +11,10 @@ function doBidding(){
 				var payload = xmlhttp.responseText;
 
 		    	parsedPayload = JSON.parse(payload);
+
+		    	console.log(parsedPayload);
+		    	
+		    	nodeId = parsedPayload.nodeId;
 
 				data = eval(parsedPayload.data);
 
@@ -25,19 +31,18 @@ function doBidding(){
 
 				// callback
 				var cbxmlhttp = new XMLHttpRequest();
-				cbxmlhttp.open("GET",'http://localhost:1337/status?nodeid=1313&capacity=' + result, true);
+				cbxmlhttp.open("GET",'http://10.0.1.15:1337/status?nodeid=' + nodeId + '&capacity=' + result, true);
 				//cbxmlhttp.open("GET",'http://localhost:1337/updatejob?result=' + result,true);
 				cbxmlhttp.send();
 	    	}
 	  	}
-	xmlhttp.open("GET","http://localhost:1337/getjob",true);
+	xmlhttp.open('GET','http://10.0.1.15:1337/getjob?nodeid=' + nodeId, true);
 	xmlhttp.send();
 }
 
-doBidding();
+//doBidding();
 
-/*
+
 setInterval(function(){
 	doBidding();
 },5000);
-*/

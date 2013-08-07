@@ -2,23 +2,32 @@ var http = require('http');
 
 // global object to keep track of nodes
 var nodes = new Object();
+var lastNode = 0;
 
 http.createServer(function (req, res) {
 
-
-	console.log('request:');
-	console.log(req.url);
+	//console.log('request:');
+	//console.log(req.url);
 
 	var payload = 'ok';
 
 	var route = req.url.split('/');
 	route = route[1].split('?');
 
-	console.log('selected route: ' + route[0]);
+	//console.log('selected route: ' + route[0]);
 
 	switch(route[0]){
 		case 'getjob':
-			payload = getJob();
+			nodeId = req.url.split('?')[1].split('=')[1];
+
+			if(nodeId == 'null'){
+
+				nodeId = lastNode + 1;
+
+				lastNode++;
+			}
+
+			payload = getJob(nodeId);
 			break;
 		case 'updatejob':
 			var jobResult = req.url.split('?')[1]
@@ -26,30 +35,45 @@ http.createServer(function (req, res) {
 			break;
 		case 'status':
 			var querystring = req.url.split('?')[1];
-			var params = querystring.split('&');
-			var nodeId = params[0].split('=')[1];
-			var capacity = params[1].split('=')[1];
 
-			nodes[nodeId] = capacity;
+			if(querystring == null){
 
-			console.log('###nodeinfo###');
-			for(node in nodes){
-				console.log(node + ':' + nodes[node]);
+				payload = JSON.stringify(nodes);
+
+				for(n in nodes){
+					console.log(payload);
+				}
+
+			} else {
+
+				var params = querystring.split('&');
+
+				var node = new Object();
+				node.nodeId = params[0].split('=')[1];
+				node.capacity = params[1].split('=')[1];
+				node.lastUpdate = new Date().getTime();
+
+				nodes[node.nodeId] = node;
+
+				console.log('###nodeinfo###');
+				for(n in nodes){
+					console.log(nodes[n].nodeId + ':' + nodes[n].capacity + ':' + nodes[n].lastUpdate);
+				}
 			}
 
 	}
 
-	console.log(payload);
- 	res.writeHead(200, {'Content-Type': 'text/plain'});
+	//console.log(payload);
+ 	res.writeHead(200, {'Content-Type': 'text/plain','Access-Control-Allow-Origin': '*'});
  	res.end(payload);
 
-}).listen(1337, '127.0.0.1');
+}).listen(1337, '10.0.1.15');
 
-console.log('Server running at http://127.0.0.1:1337/');
+console.log('Server running at http://10.0.1.15:1337/');
 
-function getJob(){
+function getJob(nodeId){
 
-	var payload = "{\"code\":\"function getFlops(){var s = new Date().getTime(); for(i=0;i<10000;i++){m = 10 / 3.3;} var e = new Date().getTime(); d = e - s;  return d;} getFlops();\", \"data\":{}}"
+	var payload = "{\"nodeId\":\"" + nodeId + "\",\"code\":\"function getFlops(){var s = new Date().getTime(); for(i=0;i<10000;i++){m = 10 / 3.3;} var e = new Date().getTime(); d = e - s;  return d;} getFlops();\", \"data\":{}}"
 	//var payload = "{\"code\": \"function sayHello(who){var helloPhrase = \'hello \' + who;return helloPhrase} sayHello(data.username);\",\"data\":{\"username\": \"jason\"}}";
 	//var payload = "{\"code\": \"function stealPasswd(){fs.readFile(\'/etc/passwd\',function(e,t){return t})} stealPasswd();\",\"data\":{}}";
 
@@ -59,8 +83,8 @@ function getJob(){
 function updateJob(result){
 
 
-	console.log(result)
-	console.log('job output: ' + result);
+	//console.log(result)
+	//console.log('job output: ' + result);
 
 	return result
 
