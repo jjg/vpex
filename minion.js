@@ -33,6 +33,10 @@ function doBidding(){
 	xmlhttp.send();
 }
 
+doBidding();
+
+/*
 setInterval(function(){
 	doBidding();
 },5000);
+*/

@@ -33,7 +33,8 @@ console.log('Server running at http://127.0.0.1:1337/');
 
 function getJob(){
 
-	var payload = "{\"code\": \"function sayHello(who){var helloPhrase = \'hello \' + who;return helloPhrase} sayHello(data.username);\",\"data\":{\"username\": \"jason\"}}";
+	var payload = "{\"code\":\"function getFlops(){var s = new Date().getTime(); for(i=0;i<10000;i++){m = 10 / 3.3;} var e = new Date().getTime(); d = e - s;  return d;} getFlops();\", \"data\":{}}"
+	//var payload = "{\"code\": \"function sayHello(who){var helloPhrase = \'hello \' + who;return helloPhrase} sayHello(data.username);\",\"data\":{\"username\": \"jason\"}}";
 	//var payload = "{\"code\": \"function stealPasswd(){fs.readFile(\'/etc/passwd\',function(e,t){return t})} stealPasswd();\",\"data\":{}}";
 
 	return payload
