@@ -25,7 +25,8 @@ function doBidding(){
 
 				// callback
 				var cbxmlhttp = new XMLHttpRequest();
-				cbxmlhttp.open("GET",'http://localhost:1337/updatejob?result=' + result,true);
+				cbxmlhttp.open("GET",'http://localhost:1337/status?nodeid=1313&capacity=' + result, true);
+				//cbxmlhttp.open("GET",'http://localhost:1337/updatejob?result=' + result,true);
 				cbxmlhttp.send();
 	    	}
 	  	}

@@ -1,5 +1,8 @@
 var http = require('http');
 
+// global object to keep track of nodes
+var nodes = new Object();
+
 http.createServer(function (req, res) {
 
 
@@ -21,6 +24,19 @@ http.createServer(function (req, res) {
 			var jobResult = req.url.split('?')[1]
 			payload = updateJob(jobResult);
 			break;
+		case 'status':
+			var querystring = req.url.split('?')[1];
+			var params = querystring.split('&');
+			var nodeId = params[0].split('=')[1];
+			var capacity = params[1].split('=')[1];
+
+			nodes[nodeId] = capacity;
+
+			console.log('###nodeinfo###');
+			for(node in nodes){
+				console.log(node + ':' + nodes[node]);
+			}
+
 	}
 
 	console.log(payload);
