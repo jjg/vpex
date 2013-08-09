@@ -1,6 +1,8 @@
 <html>
 	<head>
 		<title>vpex</title>
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 		<script>
 			function getNodes(){
 				var xmlhttp = new XMLHttpRequest();
@@ -12,6 +14,9 @@
 
 					    	console.log(nodelist);
 
+					    	$('#nodelist').clear();
+					    	$('#nodelist').append('<li>anode</li>');
+					    	/*
 					    	nodeList = document.getElementById('nodelist');
 
 					    	nodeList.innerHTML = '';
@@ -23,7 +28,8 @@
 						    	listItem.value('anode');
 
 						    	nodeList.appendChild(listItem);
-					    	}					    	
+					    	}	
+					    	*/				    	
 				    	}
 				  	}
 				xmlhttp.open('GET','http://vpex.gullicksonlaboratories.com/status', true);
