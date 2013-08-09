@@ -12,30 +12,17 @@
 
 					    	console.log(nodelist);
 
-					    	/*
-					    	nodeId = parsedPayload.nodeId;
+					    	nodeList = document.getElementById('nodelist');
 
-							data = eval(parsedPayload.data);
+					    	nodeList.innerHTML = '';
 
-							var result = null;
+					    	for(node in nodelist){
+					    		var listItem = document.createElement('li');
 
-							try{
-								result = eval(parsedPayload.code);
-							}catch(err){
-								result = 'fail';
-							}
+						    	listItem.innerHTML('anode');
 
-							callback = eval(parsedPayload.callback);
-					    	console.log(callback);
-
-							console.log('job output:');
-							console.log(result);
-
-							// callback
-							var cbxmlhttp = new XMLHttpRequest();
-							cbxmlhttp.open('GET',callback,true);
-							cbxmlhttp.send();
-							*/
+						    	nodeList.appendChild(listItem);
+					    	}					    	
 				    	}
 				  	}
 				xmlhttp.open('GET','http://vpex.gullicksonlaboratories.com/status', true);
@@ -48,6 +35,6 @@
 		</script>
 	</head>
 	<body>
-		<div id="nodes"></div>
+		<ol id="nodelist"></ol>
 	</body>
 </html>
