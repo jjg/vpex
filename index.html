@@ -15,7 +15,11 @@
 					    	console.log(nodelist);
 
 					    	$('#nodelist').empty();
-					    	$('#nodelist').append('<li>anode</li>');
+
+					    	for(node in nodelist){
+					    		$('#nodelist').append('<li>' + node.nodeId + '</li>');
+					    	}
+					    	
 					    	/*
 					    	nodeList = document.getElementById('nodelist');
 
