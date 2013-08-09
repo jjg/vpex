@@ -1,5 +1,5 @@
 nodeId = null;
-strawboss = '10.0.1.15';
+strawboss = 'skylab3.gullicksonlaboratories.com';
 
 function doBidding(){
 	var xmlhttp = new XMLHttpRequest();
