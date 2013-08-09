@@ -1,5 +1,5 @@
 nodeId = null;
-strawboss = '10.0.1.15';
+strawboss = 'vpex.gullicksonlaboratories.com';
 
 function doBidding(){
 	var xmlhttp = new XMLHttpRequest();
@@ -35,7 +35,7 @@ function doBidding(){
 				cbxmlhttp.send();
 	    	}
 	  	}
-	xmlhttp.open('GET','http://' + strawboss + ':1337/getjob?nodeid=' + nodeId, true);
+	xmlhttp.open('GET','http://' + strawboss + '/getjob?nodeid=' + nodeId, true);
 	xmlhttp.send();
 }
 
