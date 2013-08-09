@@ -12,14 +12,17 @@
 				    	{							
 					    	var nodelist = JSON.parse(xmlhttp.responseText);
 
-					    	console.log(nodelist);
+					    	//console.log(nodelist);
 
 					    	$('#nodelist').empty();
 
 					    	for(node in nodelist){
+
+					    		console.log(node);
+
 					    		$('#nodelist').append('<li>' + node.nodeId + '</li>');
 					    	}
-					    	
+
 					    	/*
 					    	nodeList = document.getElementById('nodelist');
 
