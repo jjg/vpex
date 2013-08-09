@@ -1,0 +1,55 @@
+<html>
+	<head>
+		<title>vpex</title>
+		<script>
+			function getNodes(){
+				var xmlhttp = new XMLHttpRequest();
+				xmlhttp.onreadystatechange=function()
+					{
+				  		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+				    	{
+							var statusResponse = xmlhttp.responseText;
+
+					    	nodes = JSON.parse(statusResponse);
+
+					    	console.log(nodes);
+					    	
+					    	/*
+					    	nodeId = parsedPayload.nodeId;
+
+							data = eval(parsedPayload.data);
+
+							var result = null;
+
+							try{
+								result = eval(parsedPayload.code);
+							}catch(err){
+								result = 'fail';
+							}
+
+							callback = eval(parsedPayload.callback);
+					    	console.log(callback);
+
+							console.log('job output:');
+							console.log(result);
+
+							// callback
+							var cbxmlhttp = new XMLHttpRequest();
+							cbxmlhttp.open('GET',callback,true);
+							cbxmlhttp.send();
+							*/
+				    	}
+				  	}
+				xmlhttp.open('GET','http://vpex.gullicksonlaboratories.com/status', true);
+				xmlhttp.send();
+			}
+
+			setInterval(function(){
+				getNodes();
+			},5000);
+		</script>
+	</head>
+	<body>
+		<div id="nodes"></div>
+	</body>
+</html>
