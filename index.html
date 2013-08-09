@@ -3,6 +3,7 @@
 		<title>vpex</title>
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 		<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+		<script src="minion.js"></script>
 		<script>
 			function getNodes(){
 				var xmlhttp = new XMLHttpRequest();
@@ -12,8 +13,6 @@
 				    	{							
 					    	var nodelist = JSON.parse(xmlhttp.responseText);
 
-					    	//console.log(nodelist);
-
 					    	$('#nodelist').empty();
 
 					    	for(node in nodelist){
@@ -21,22 +20,7 @@
 					    		console.log(node);
 
 					    		$('#nodelist').append('<img src="http://media.tumblr.com/tumblr_m12e94nHDq1qacv0k.gif">');
-					    	}
-
-					    	/*
-					    	nodeList = document.getElementById('nodelist');
-
-					    	nodeList.innerHTML = '';
-
-					    	for(node in nodelist){
-
-					    		var listItem = document.createElement('li');
-
-						    	listItem.value('anode');
-
-						    	nodeList.appendChild(listItem);
-					    	}	
-					    	*/				    	
+					    	}		    	
 				    	}
 				  	}
 				xmlhttp.open('GET','http://vpex.gullicksonlaboratories.com/status', true);
